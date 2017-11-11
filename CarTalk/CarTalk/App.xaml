@@ -5,6 +5,13 @@
 	<Application.Resources>
 
 		<!-- Application resource dictionary -->
-
+        <ResourceDictionary>
+            <Style x:Key="TextHint" TargetType="Label">
+                <Setter Property="FontAttributes" Value="Italic">
+                </Setter>
+                <Setter Property="FontSize" Value="9">
+                </Setter>
+            </Style>
+        </ResourceDictionary>
 	</Application.Resources>
 </Application>

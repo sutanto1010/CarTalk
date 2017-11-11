@@ -1,13 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
              Title="Setting"
              x:Class="CarTalk.Views.Setting">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView Padding="10">
+            <StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <iconize:IconLabel FontSize="17" 
+                                       Text="ion-bluetooth" 
+                                       VerticalTextAlignment="Center" />
+                    <Label Text="Choose Device" 
+                           TextColor="Black" 
+                           FontAttributes="Bold" 
+                           FontSize="17" />
+                </StackLayout>
+                <Label Text="Select your CarTalk device you want to use." 
+                       Style="{StaticResource TextHint}"
+                       HorizontalTextAlignment="Center"
+                       VerticalOptions="Center" />
+                <Picker x:Name="pickerDevice"
+                        ItemsSource="{Binding DevicesPicker}" 
+                        SelectedIndexChanged="OnSelectedDeviceChanged"
+                        VerticalOptions="Center">
+
+                </Picker>
+                <Editor x:Name="editorText" IsVisible="False" />
+                <Button Clicked="ButtonConnectTapped" 
+                        Text="Connect"></Button>
+                <StackLayout Orientation="Horizontal">
+                    <iconize:IconLabel FontSize="17" 
+                                       Text="ion-android-chat" 
+                                       VerticalTextAlignment="Center" />
+                    <Label Text="Messages" 
+                           TextColor="Black" 
+                           FontAttributes="Bold" 
+                           FontSize="17" />
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

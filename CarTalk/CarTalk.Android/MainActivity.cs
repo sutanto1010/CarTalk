@@ -1,15 +1,13 @@
-﻿using System;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
 
 namespace CarTalk.Droid
 {
-    [Activity(Label = "CarTalk", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "CarTalk", Icon = "@drawable/icon", 
+        Theme = "@style/MainTheme", 
+        MainLauncher = true, 
+        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
@@ -18,8 +16,11 @@ namespace CarTalk.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(bundle);
-
+            Plugin.Iconize.Iconize
+                .With(new Plugin.Iconize.Fonts.FontAwesomeModule())
+                .With(new Plugin.Iconize.Fonts.IoniconsModule());
             global::Xamarin.Forms.Forms.Init(this, bundle);
+            FormsPlugin.Iconize.Droid.IconControls.Init();
             LoadApplication(new App());
         }
     }

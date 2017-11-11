@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Bluetooth;
+using Android.Widget;
 using Java.Util;
 using XamarinForms.Sutanto.Bluetooth.Droid;
 using XamarinForms.Sutanto.Bluetooth.Extensions;
@@ -20,14 +21,22 @@ namespace XamarinForms.Sutanto.Bluetooth.Droid
         public IList<Device> GetPairedDevices()
         {
             var devices = new List<Device>();
-            var adapter = BluetoothAdapter.DefaultAdapter;
-            foreach (var device in adapter.BondedDevices)
+            try
             {
-                devices.Add(new Device()
+                var adapter = BluetoothAdapter.DefaultAdapter;
+                foreach (var device in adapter.BondedDevices)
                 {
-                    Address = device.Address,
-                    Name = device.Name
-                });
+                    devices.Add(new Device()
+                    {
+                        Address = device.Address,
+                        Name = device.Name
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                Toast.MakeText(Application.Context, "Error on getting bluetooth devices: " + ex.Message,
+                    ToastLength.Long).Show();
             }
             return devices;
         }

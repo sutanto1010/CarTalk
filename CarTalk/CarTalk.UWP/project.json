@@ -2,7 +2,10 @@
   "dependencies": {
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
     "Syncfusion.Xamarin.SfListView": "15.3.0.33",
-    "Xamarin.Forms": "2.4.0.280"
+    "Xam.FormsPlugin.Iconize": "1.0.10",
+    "Xam.Plugin.Iconize.FontAwesome": "1.0.10",
+    "Xam.Plugin.Iconize.Ionicons": "1.0.10",
+    "Xamarin.Forms": "2.4.0.74863"
   },
   "frameworks": {
     "uap10.0.10586": {}
