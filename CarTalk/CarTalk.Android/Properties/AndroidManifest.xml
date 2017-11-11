@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="17.11.1" package="net.sutanto.CarTalk" android:installLocation="auto">
+	<uses-sdk android:minSdkVersion="17" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.BLUETOOTH" />
+	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+	<application android:label="CarTalk.Android"></application>
+	<uses-feature android:name="android.hardware.bluetooth_le" android:required="true" />
+</manifest>

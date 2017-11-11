@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Home"
+             x:Class="CarTalk.Views.MainPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Choose Device" VerticalOptions="Center" />
+                    <Picker Grid.Column="1" 
+                            x:Name="pickerDevice"
+                            ItemsSource="{Binding DevicesPicker}" 
+                            SelectedIndexChanged="OnSelectedDeviceChanged"
+                            VerticalOptions="Center">
+                        
+                    </Picker>
+                </Grid>
+                <Editor x:Name="editorText" />
+                <Button Clicked="ButtonConnectTapped" Text="Connect"></Button>
+                <Button Clicked="ButtonSend" Text="Send"></Button>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
