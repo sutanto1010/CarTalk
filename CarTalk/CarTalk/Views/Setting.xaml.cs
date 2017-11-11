@@ -1,5 +1,6 @@
 ﻿using System;
 using CarTalk.ViewModels;
+using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XamarinForms.Sutanto.Bluetooth;
@@ -87,6 +88,14 @@ namespace CarTalk.Views
         private void OnSendCommandSuccess()
         {
             DisplayAlert("Success", "Hooray!", "Okay");
+        }
+
+        private async void OnAddButtonTapped(object sender, EventArgs e)
+        {
+            var view = sender as View;
+            await view.ScaleTo(0.80, 50, Easing.CubicOut);
+            await view.ScaleTo(1, 50, Easing.CubicIn);
+            MessageEditor.Current.Show();
         }
     }
 }

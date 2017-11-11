@@ -1,6 +1,7 @@
 ﻿{
   "dependencies": {
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
+    "Rg.Plugins.Popup": "1.0.4",
     "Syncfusion.Xamarin.SfListView": "15.3.0.33",
     "Xam.FormsPlugin.Iconize": "1.0.10",
     "Xam.Plugin.Iconize.FontAwesome": "1.0.10",

@@ -38,6 +38,21 @@
                            FontAttributes="Bold" 
                            FontSize="17" />
                 </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Style="{StaticResource TextHint}"
+                           VerticalOptions="Center"
+                           HorizontalOptions="StartAndExpand"
+                           Text="Add or remove you message here" />
+                    <iconize:IconLabel 
+                        VerticalOptions="Center"
+                        FontSize="24"
+                        Text="ion-plus-circled"
+                        HorizontalOptions="End">
+                        <iconize:IconLabel.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnAddButtonTapped"></TapGestureRecognizer>
+                        </iconize:IconLabel.GestureRecognizers>
+                    </iconize:IconLabel>
+                </StackLayout>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
