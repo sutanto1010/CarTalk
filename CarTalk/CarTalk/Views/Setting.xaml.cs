@@ -25,13 +25,10 @@ namespace CarTalk.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            GetPairedDevices();
+            if(!Model.IsConnected)
+                GetPairedDevices();
         }
 
-        private void ScanButtonTapped(object sender, EventArgs e)
-        {
-            GetPairedDevices();
-        }
 
         private void GetPairedDevices()
         {

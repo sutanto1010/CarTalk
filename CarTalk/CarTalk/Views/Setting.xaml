@@ -4,56 +4,78 @@
              xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
              Title="Setting"
              x:Class="CarTalk.Views.Setting">
-    <ContentPage.Content>
-        <ScrollView Padding="10">
-            <StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <iconize:IconLabel FontSize="17" 
+    <ScrollView Padding="10">
+        <StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <iconize:IconLabel FontSize="17" 
                                        Text="ion-bluetooth" 
                                        VerticalTextAlignment="Center" />
-                    <Label Text="Choose Device" 
+                <Label Text="Choose Device" 
                            TextColor="Black" 
                            FontAttributes="Bold" 
                            FontSize="17" />
-                </StackLayout>
-                <Label Text="Select your CarTalk device you want to use." 
+            </StackLayout>
+            <Label Text="Select your CarTalk device you want to use." 
                        Style="{StaticResource TextHint}"
                        HorizontalTextAlignment="Center"
                        VerticalOptions="Center" />
-                <Picker x:Name="pickerDevice"
+            <Picker x:Name="pickerDevice"
+                        IsEnabled="{Binding IsConnected, Converter={StaticResource BooleanConverter}}"
                         ItemsSource="{Binding DevicesPicker}" 
-                        SelectedIndexChanged="OnSelectedDeviceChanged"
+                        SelectedIndex="{Binding SelectedDeviceIndex}"
                         VerticalOptions="Center">
 
-                </Picker>
-                <Editor x:Name="editorText" IsVisible="False" />
-                <Button Clicked="ButtonConnectTapped" 
-                        Text="Connect"></Button>
-                <StackLayout Orientation="Horizontal">
-                    <iconize:IconLabel FontSize="17" 
+            </Picker>
+            <Editor x:Name="editorText" IsVisible="False" />
+            <Label Text="{Binding LoadingText}" 
+                   IsVisible="{Binding Loading}"
+                   FontAttributes="Italic"
+                   FontSize="10"
+                   HorizontalOptions="Center" />
+            <StackLayout Orientation="Horizontal" 
+                         IsVisible="{Binding IsConnected}"
+                         HorizontalOptions="CenterAndExpand">
+                <iconize:IconLabel Text="ion-ios-checkmark" 
+                                   VerticalOptions="Center"
+                                   TextColor="#2B571E"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Start"
+                                   FontSize="20" />
+                <Label Text="CONNECTED" 
+                       IsVisible="True"
+                       VerticalOptions="Center"
+                       TextColor="#2B571E"
+                       FontAttributes="Bold"
+                       FontSize="18"
+                       HorizontalOptions="Start" />
+            </StackLayout>
+            <Button Command="{Binding ConnectDisconnectCommand}" 
+                    IsEnabled="{Binding Loading, Converter={StaticResource BooleanConverter}}"
+                    Text="{Binding ButtonConnectText}" />
+            <StackLayout Orientation="Horizontal">
+                <iconize:IconLabel FontSize="17" 
                                        Text="ion-android-chat" 
                                        VerticalTextAlignment="Center" />
-                    <Label Text="Messages" 
+                <Label Text="Messages" 
                            TextColor="Black" 
                            FontAttributes="Bold" 
                            FontSize="17" />
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Label Style="{StaticResource TextHint}"
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Style="{StaticResource TextHint}"
                            VerticalOptions="Center"
                            HorizontalOptions="StartAndExpand"
                            Text="Add or remove you message here" />
-                    <iconize:IconLabel 
+                <iconize:IconLabel 
                         VerticalOptions="Center"
                         FontSize="24"
                         Text="ion-plus-circled"
                         HorizontalOptions="End">
-                        <iconize:IconLabel.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnAddButtonTapped"></TapGestureRecognizer>
-                        </iconize:IconLabel.GestureRecognizers>
-                    </iconize:IconLabel>
-                </StackLayout>
+                    <iconize:IconLabel.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnAddButtonTapped"></TapGestureRecognizer>
+                    </iconize:IconLabel.GestureRecognizers>
+                </iconize:IconLabel>
             </StackLayout>
-        </ScrollView>
-    </ContentPage.Content>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

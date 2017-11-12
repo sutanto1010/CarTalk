@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converter="clr-namespace:CarTalk.Converter;assembly=CarTalk"
              x:Class="CarTalk.App">
 	<Application.Resources>
 
@@ -12,6 +13,7 @@
                 <Setter Property="FontSize" Value="9">
                 </Setter>
             </Style>
+            <converter:BooleanConverter x:Key="BooleanConverter" />
         </ResourceDictionary>
 	</Application.Resources>
 </Application>
