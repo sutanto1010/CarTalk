@@ -4,6 +4,7 @@ using CarTalk.ViewModels;
 using Xamarin.Forms;
 using XamarinForms.Sutanto.Bluetooth;
 using Device = XamarinForms.Sutanto.Bluetooth.Device;
+using ItemTappedEventArgs = Syncfusion.ListView.XForms.ItemTappedEventArgs;
 
 namespace CarTalk.Views
 {
@@ -23,5 +24,11 @@ namespace CarTalk.Views
         }
 
 
+        private async void OnMessageTapped(object sender, EventArgs e)
+        {
+            var view = sender as View;
+            await view.ScaleTo(0.90, 50, Easing.CubicOut);
+            await view.ScaleTo(1, 50, Easing.CubicIn);
+        }
     }
 }
