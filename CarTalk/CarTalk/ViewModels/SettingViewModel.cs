@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using CarTalk.Models;
 using Xamarin.Forms;
 using XamarinForms.Sutanto.Bluetooth;
 using Device = XamarinForms.Sutanto.Bluetooth.Device;
@@ -47,6 +48,7 @@ namespace CarTalk.ViewModels
             Devices=new ObservableCollection<Device>();
             Devices.CollectionChanged += OnDevicesCollectionChanged;
             ConnectDisconnectCommand = new Command(ConnectOrDisconnect);
+            Messages = new ObservableCollection<Message>();
         }
 
         private void ConnectOrDisconnect()
@@ -99,5 +101,7 @@ namespace CarTalk.ViewModels
                 return items;
             }
         }
+
+        public ObservableCollection<Message> Messages { get; set; }
     }
 }

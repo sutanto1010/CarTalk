@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+using CarTalk.Models;
 using CarTalk.ViewModels;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
@@ -12,6 +15,7 @@ namespace CarTalk.Views
     {
         private static Setting _instance;
         private ITBluetoothManager _bluetoothManager;
+        private IPlatformUtils _platformUtils;
         public SettingViewModel Model => BindingContext as SettingViewModel;
         public static Setting Current => _instance ?? (_instance = new Setting());
         private Setting()
@@ -19,14 +23,17 @@ namespace CarTalk.Views
             InitializeComponent();
             BindingContext = new SettingViewModel();
             _bluetoothManager = DependencyService.Get<ITBluetoothManager>();
+            _platformUtils = DependencyService.Get<IPlatformUtils>();
         }
 
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            if(!Model.IsConnected)
+            if(!Model.Devices.Any())
                 GetPairedDevices();
+            var messages = _platformUtils.Load<ObservableCollection<Message>>(Constant.Path.Messages);
+            Model.Messages = messages;
         }
 
 

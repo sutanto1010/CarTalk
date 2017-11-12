@@ -82,6 +82,14 @@ namespace XamarinForms.Sutanto.Bluetooth.Droid
         public void Disconnect()
         {
             //TODO:
+            try
+            {
+                _btSocket.Close();
+            }
+            catch (Exception ex)
+            {
+                //TODO: Don't swallow this error message
+            }
         }
 
         public void Write(char text, Action<Exception> OnError)

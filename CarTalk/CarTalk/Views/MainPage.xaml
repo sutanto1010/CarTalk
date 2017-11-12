@@ -9,12 +9,17 @@
         <StackLayout Orientation="Horizontal" BackgroundColor="Transparent">
             <Entry Placeholder="Tell them something here..."
                    FontSize="11"
-                   x:Name="EditorTellThemSomethingHere"
+                   x:Name="EditorFreeText"
                    HorizontalOptions="FillAndExpand"  />
             <iconize:IconLabel  Text="ion-android-send"
                                 Margin="0,0,10,0"
                                 VerticalTextAlignment="Center"
-                                HorizontalOptions="End" />
+                                FontSize="20"
+                                HorizontalOptions="End">
+                <iconize:IconLabel.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnButtonSendTapped"></TapGestureRecognizer>
+                </iconize:IconLabel.GestureRecognizers>
+            </iconize:IconLabel>
         </StackLayout>
         <listView:SfListView ItemsSource="{Binding Messages}"  
                                      ItemSize="150"

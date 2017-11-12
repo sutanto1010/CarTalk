@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using System.IO;
+using Android.App;
 using Android.Content.PM;
 using Android.OS;
 
@@ -21,6 +22,7 @@ namespace CarTalk.Droid
                 .With(new Plugin.Iconize.Fonts.IoniconsModule());
             global::Xamarin.Forms.Forms.Init(this, bundle);
             FormsPlugin.Iconize.Droid.IconControls.Init();
+            new PlatformUtils().Init();
             LoadApplication(new App());
         }
     }

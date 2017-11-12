@@ -38,7 +38,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Constant.cs" />
     <Compile Include="Converter\BooleanConverter.cs" />
+    <Compile Include="IPlatformUtils.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />

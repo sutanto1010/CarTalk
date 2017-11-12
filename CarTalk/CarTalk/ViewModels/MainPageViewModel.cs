@@ -12,10 +12,6 @@ namespace CarTalk.ViewModels
         public MainPageViewModel()
         {
             Messages = new ObservableCollection<Message>();
-            Messages.Add(new Message(){Title = "Hello",Content = "HELLO"});
-            Messages.Add(new Message(){Title = "Turn Left",Content = "LET ME TURN LEFT"});
-            Messages.Add(new Message(){Title = "Turn Right",Content = "LET ME TURN RIGHT"});
-            Messages.Add(new Message(){Title = "Thanks",Content = "THANKS BRO"});
         }
 
         public ObservableCollection<Message> Messages
