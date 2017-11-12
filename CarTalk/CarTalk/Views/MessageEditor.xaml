@@ -22,11 +22,11 @@
                  VerticalOptions="StartAndExpand"
                  BackgroundColor="White">
         <Label Text="Title"/>
-        <Editor />
+        <Editor x:Name="editorTitle" />
         <Label Text="Message"/>
-        <Editor />
+        <Editor x:Name="editorMessage" />
         <StackLayout Orientation="Horizontal">
-            <Button HorizontalOptions="EndAndExpand" Text="Save"></Button>
+            <Button HorizontalOptions="EndAndExpand" Clicked="OnSaveButtonTapped" Text="Save"></Button>
             <Button HorizontalOptions="StartAndExpand" Text="Cancel" Clicked="OnCancelButtonTapped"></Button>
         </StackLayout>
     </StackLayout>

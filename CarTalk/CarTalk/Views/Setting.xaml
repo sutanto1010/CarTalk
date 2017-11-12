@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
+             xmlns:listView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              Title="Setting"
              x:Class="CarTalk.Views.Setting">
     <ScrollView Padding="10">
@@ -65,7 +66,7 @@
                 <Label Style="{StaticResource TextHint}"
                            VerticalOptions="Center"
                            HorizontalOptions="StartAndExpand"
-                           Text="Add or remove you message here" />
+                           Text="Add or remove your message here" />
                 <iconize:IconLabel 
                         VerticalOptions="Center"
                         FontSize="24"
@@ -76,6 +77,44 @@
                     </iconize:IconLabel.GestureRecognizers>
                 </iconize:IconLabel>
             </StackLayout>
+
+            <listView:SfListView ItemsSource="{Binding Messages}"  
+                                 AutoFitMode="Height"
+                                 AllowSwiping="True"
+                             VerticalOptions="FillAndExpand">
+                <listView:SfListView.LeftSwipeTemplate>
+                    <DataTemplate x:Name="LeftSwipeTemplate">
+                        <Grid>
+                            <Grid BackgroundColor="Red" 
+                                  HorizontalOptions="Fill" 
+                                  VerticalOptions="Fill" 
+                                  Grid.Column="0">
+                                  <Grid.GestureRecognizers>
+                                      <TapGestureRecognizer Tapped="OnSwipeDeleteTapped"></TapGestureRecognizer>
+                                  </Grid.GestureRecognizers>
+                                  <iconize:IconLabel 
+                                      TextColor="White"
+                                      FontSize="20"
+                                      Text="ion-ios-trash-outline" 
+                                      VerticalOptions="Center" 
+                                      HorizontalOptions="Center" />
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </listView:SfListView.LeftSwipeTemplate>
+                <listView:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding Title}" 
+                                   FontSize="18" 
+                                   HorizontalOptions="Start" />
+                            <Label Text="{Binding Content}" FontSize="9" 
+                                   FontAttributes="Italic" 
+                                   HorizontalOptions="Start" />
+                        </StackLayout>
+                    </DataTemplate>
+                </listView:SfListView.ItemTemplate>
+            </listView:SfListView>
         </StackLayout>
     </ScrollView>
 </ContentPage>

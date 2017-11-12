@@ -24,6 +24,28 @@ namespace CarTalk.Views
             BindingContext = new SettingViewModel();
             _bluetoothManager = DependencyService.Get<ITBluetoothManager>();
             _platformUtils = DependencyService.Get<IPlatformUtils>();
+            MessageEditor.Current.OnSaveButton = OnSaveMessage;
+        }
+
+        private void OnSaveMessage(string title, string content)
+        {
+            var message = Model.Messages.FirstOrDefault(i => i.Title == title);
+            if (message != null)
+            {
+                message.Content = content;
+            }
+            else
+            {
+                message = new Message() {Title = title, Content = content};
+                Model.Messages.Add(message);
+            }
+
+            SaveMessage();
+        }
+
+        private void SaveMessage()
+        {
+            _platformUtils.Save(Model.Messages, Constant.Path.Messages);
         }
 
 
@@ -47,52 +69,6 @@ namespace CarTalk.Views
             }
         }
 
-        private void OnSelectedDeviceChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private async void ConnectToDevice()
-        {
-
-            var device = Model.Devices[pickerDevice.SelectedIndex];
-            _bluetoothManager.Connect(device, OnDeviceConnected, OnError);
-        }
-
-
-        private void OnDeviceConnected()
-        {
-            DisplayAlert("Success", $"Connected to device!", "Okay");
-        }
-
-        private void OnError(Exception obj)
-        {
-            DisplayAlert("Error", $"Unable connect to device: {obj.Message}", "Okay");
-        }
-
-        private void ButtonConnectTapped(object sender, EventArgs e)
-        {
-            ConnectToDevice();
-        }
-
-        private void ButtonSend(object sender, EventArgs e)
-        {
-            var text = editorText.Text + "\n";
-            for (int i = 0; i < text.Length; i++)
-            {
-                _bluetoothManager.Write(text[i], ex => { });
-            }
-        }
-
-        private void OnSendCommandError(Exception obj)
-        {
-            DisplayAlert("Error", obj.Message, "Okay");
-        }
-
-        private void OnSendCommandSuccess()
-        {
-            DisplayAlert("Success", "Hooray!", "Okay");
-        }
 
         private async void OnAddButtonTapped(object sender, EventArgs e)
         {
@@ -100,6 +76,14 @@ namespace CarTalk.Views
             await view.ScaleTo(0.80, 50, Easing.CubicOut);
             await view.ScaleTo(1, 50, Easing.CubicIn);
             MessageEditor.Current.Show();
+        }
+
+        private void OnSwipeDeleteTapped(object sender, EventArgs e)
+        {
+            var view = sender as View;
+            var message = view.BindingContext as Message;
+            Model.Messages.Remove(message);
+            SaveMessage();
         }
     }
 }

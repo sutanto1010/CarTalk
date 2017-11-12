@@ -8,6 +8,7 @@ namespace CarTalk.Views
 	public partial class MessageEditor
 	{
 	    private static MessageEditor _instance;
+	    public Action<string, string> OnSaveButton;
 
 	    private MessageEditor ()
 		{
@@ -29,6 +30,12 @@ namespace CarTalk.Views
 	    private void OnCancelButtonTapped(object sender, EventArgs e)
 	    {
 	        Hide();
+	    }
+
+	    private void OnSaveButtonTapped(object sender, EventArgs e)
+	    {
+	        OnSaveButton?.Invoke(editorTitle.Text, editorMessage.Text);
+            Hide();
 	    }
 	}
 }

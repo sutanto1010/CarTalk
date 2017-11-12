@@ -18,6 +18,9 @@ namespace CarTalk.ViewModels
         public ICommand ConnectDisconnectCommand { get; set; }
         private ITBluetoothManager _bluetoothManager;
         private int _selectedDeviceIndex;
+        private ObservableCollection<Message> _messages;
+        private IPlatformUtils _platformUtils;
+
         public bool IsConnected
         {
             get => _isConnected;
@@ -49,7 +52,14 @@ namespace CarTalk.ViewModels
             Devices.CollectionChanged += OnDevicesCollectionChanged;
             ConnectDisconnectCommand = new Command(ConnectOrDisconnect);
             Messages = new ObservableCollection<Message>();
+            //Messages.CollectionChanged += OnMessagesChanged;
+            _platformUtils = DependencyService.Get<IPlatformUtils>();
         }
+
+        //private void OnMessagesChanged(object sender, NotifyCollectionChangedEventArgs e)
+        //{
+        //    _platformUtils.Save(e.NewItems, Constant.Path.Messages);
+        //}
 
         private void ConnectOrDisconnect()
         {
@@ -60,7 +70,8 @@ namespace CarTalk.ViewModels
                 {
 
                     LoadingText = "Connecting...";
-                    _bluetoothManager.Connect(Devices[SelectedDeviceIndex],
+                    Device device= Devices[SelectedDeviceIndex];
+                    _bluetoothManager.Connect(device,
                         () =>
                         {
                             IsConnected = true;
@@ -68,6 +79,7 @@ namespace CarTalk.ViewModels
                         ex =>
                         {
                             IsConnected = false;
+                            _platformUtils.Notify($"Error, unable connect to {device.Name}. {ex.Message}");
                         });
                 }
                 else
@@ -102,6 +114,14 @@ namespace CarTalk.ViewModels
             }
         }
 
-        public ObservableCollection<Message> Messages { get; set; }
+        public ObservableCollection<Message> Messages
+        {
+            get => _messages;
+            set
+            {
+                _messages = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }

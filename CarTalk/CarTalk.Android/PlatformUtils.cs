@@ -47,8 +47,15 @@ namespace CarTalk.Droid
 
         public void Notify(string message, bool isLongDuration = false)
         {
-            var length = isLongDuration ? ToastLength.Long : ToastLength.Short;
-            Toast.MakeText(Application.Context, message, length).Show();
+            try
+            {
+                var length = isLongDuration ? ToastLength.Long : ToastLength.Short;
+                Toast.MakeText(Application.Context, message, length).Show();
+            }
+            catch (Exception e)
+            {
+                
+            }
         }
 
         public void Init()
